@@ -7,90 +7,240 @@ public class Main {
         Boolean onOff = true;
         Scanner sc = new Scanner(System.in);
         int contVar = 0;
+        //String[] numeros = new String[50];
+        String[] numeros = new String[50];
+        char[] variaveis = new char[50];
+
+
+        int n1 = 0, n2 = 0;
 
         while (onOff) {
             String variavel = sc.nextLine();
+         
+            if (variavel.equals("/sair")) {
+                onOff = false;
+                break;
+            }
+            
             String num = "";
 
             variavel = variavel.toUpperCase();
+            variavel = variavel.replaceAll(" ", ""); // Remove espaços em branco
 
             char[] variavelArray = variavel.toCharArray();
             int tamVar = variavel.length();
 
-            //System.out.println("Tamanho da variável: " + tamVar);
+            if (tamVar <= 1) {
+                if (Character.isLetter(variavelArray[0])) {
+                    if (contVar == 0) {
+                        System.out.println("Variavel nao encontrada.");
+                    }
+                    for (int k = 0; k < contVar; k++) {
+                        if (variavelArray[0] == variaveis[k]) {
+                            System.out.println(numeros[k]);
+                            break;
+                        }
 
-
-            if (Character.isLetter(variavelArray[0]) && variavelArray[1] == ' ' && variavelArray[2] == '=' && variavelArray[3] == ' ') {
-                if (tamVar > 5) {
-                    for (int i = 4; i <= tamVar; i++) {
+                        if (k == contVar - 1) {
+                            System.out.println("Variavel nao encontrada.");
+                        }
+                    }
+                }
+            } else {
+                //Se tamVar > 1
+            if (Character.isLetter(variavelArray[0]) && variavelArray[1] == '=') { //
+                if (tamVar > 3) {
+                    for (int i = 2; i <= tamVar; i++) {
                         if (Character.isDigit(variavelArray[i])) {
                             num += variavelArray[i];
+                            if (i == tamVar - 1) { // Se verificar que os caracteres são números, ele conta como 1 variável válida
+                                contVar += 1;
+                            }
                         } else {
                             System.out.println("Erro: expressão inválida");
                         }
                     }
+                    variaveis[contVar] = variavelArray[0];
+                    numeros[contVar] = num;
+                    num = "";
                 } else {
-                    if (Character.isDigit(variavelArray[4])) {
-                        num += variavelArray[4];
+                    if (Character.isDigit(variavelArray[2])) {  //x=12, y=2 numeros =[12, \0]
+                        num = Character.toString(variavelArray[2]); // Transforma o caracter para string, pois a lista de números são strings
+                        variaveis[contVar] = variavelArray[0];
+                        numeros[contVar] = num;
+                        contVar++;
+                        num = "";
                     } else {
                         System.out.println("Erro: expressão inválida");
-                }
-
-                contVar += 1;
-                int tamVariaveis = (contVar*2);
-                //System.out.println("Tamanho variáveis: " + tamVariaveis);
-                String variaveis[] = new String[(tamVariaveis)]; // Lista para armazenar as variáveis e seus valores
-                System.out.println("Tamanho da lista: " + tamVariaveis);
-                int numero = Integer.valueOf(num); // Transforma a string num em um número inteiro
-                        //System.out.println("Variável: " + variavelArray[0] + " = " + "Número: " + numero); 
-                    for (int j = 0; j < (tamVariaveis); j++) {
-                            //System.out.println("J: " + j);
-                            variaveis[j] = String.valueOf(variavelArray[0]); // É necessário transformar o caractere em string para poder armazenar a variável
-                            variaveis[j+1] = String.valueOf(numero); // É necessário transformar o número em string para poder armazenar o número
-                            //System.out.println(j);
-                            j++;
-                            //System.out.println(j);
-                            if (variavelArray[0] == variavelArray[j]) {
-                                variavelArray[j + 1] = variavelArray[numero];
-                            }
-                            //System.out.println("Variável: " + variaveis[j] + " Número: " + variaveis[j+1]);
-                        }
-
-                        for (int k = 0; k < (contVar - 1); k++) {
-                            System.out.println("Variável: " + variaveis[k] + " Número: " + variaveis[k+1]);
-                            k++;
-                        }
-                        //variavel = sc.nextLine();
-                    //} else {
-                        //System.out.println("Erro: expressão inválida");
                     }
                 }
-            //} else {
-                //System.out.println("Erro: expressão inválida");
-                //variavel = sc.nextLine();
-            //}
-        }
-        // while (contVar <= 1) {
-        //     Scanner sc = new Scanner(System.in);
-        //     contVar += 1;
-        // }
-        // for (int i = 0; i < tamVar; i++) {
-        //     if (Character.isLetter(variavelArray[i])) {
-        //         variavelArray[i] = Character.toUpperCase(variavelArray[i]);
-        //         System.out.println("Caractere: " + variavelArray[i]);
-        //     } else if (Character.isDigit(variavelArray[i])) {
-        //         variavelArray[i] = Character.forDigit(Character.getNumericValue(variavelArray[i]), 10);
-        //         //variavelArray[i] = Character.getNumericValue(variavelArray[i]);
-        //         //System.out.println("Dígito: " + variavelArray[i]);
-        //     }
-        //     System.out.println("variavelArray[i]: " + variavelArray[i]);
-        // }
+            } else if (Character.isLetter(variavelArray[0])) {
+                if (contVar == 0) {
+                    System.out.println("Variavel " + variavelArray[0] + " nao encontrada. 1");
+                }
+                
+                for (int i = 0; i < contVar; i++) {
+                    if (variavelArray[0] == variaveis[i]) {
+                        break;
+                    }
 
-        // System.out.println(variavelArray);
+                    if (i == contVar - 1) {
+                        System.out.println("Variavel " + variavelArray[0] + " nao encontrada 2.");
+                    }
+                }
+                //Soma
+                if (variavelArray[1] == '+' && Character.isLetter(variavelArray[2])) {
+                    for (int i = 0; i < contVar; i++) {
+                        if (variavelArray[2] == variaveis[i]) {
+                            break;
+                        }
+
+                        if (i == contVar - 1) {
+                            System.out.println("Variavel " + variavelArray[0] + " nao encontrada 4.");
+                        }
+                    }
+
+                    for (int k = 0; k < contVar; k++) {
+                        if (variavelArray[0] == variaveis[k]) {
+                            n1 = Integer.valueOf(numeros[k]);
+                        }
+                    }
+
+                    for (int k = 0; k < contVar; k++) {
+                        if (variavelArray[2] == variaveis[k]) {
+                            n2 = Integer.valueOf(numeros[k]);
+                        }
+                    }
+                    int soma = 0;
+                    soma = n1 + n2;
+                    System.out.println(soma);
+                } 
+                //Subtração
+                else if (variavelArray[1] == '-' && Character.isLetter(variavelArray[2])) {
+                    for (int i = 0; i < contVar; i++) {
+                        if (variavelArray[2] == variaveis[i]) {
+                            break;
+                        }
+
+                        if (i == contVar - 1) {
+                            System.out.println("Variavel " + variavelArray[0] + " nao encontrada 4.");
+                        }
+                    }
+
+                    for (int k = 0; k < contVar; k++) {
+                        if (variavelArray[0] == variaveis[k]) {
+                            n1 = Integer.valueOf(numeros[k]);
+                        }
+                    }
+
+                    for (int k = 0; k < contVar; k++) {
+                        if (variavelArray[2] == variaveis[k]) {
+                            n2 = Integer.valueOf(numeros[k]);
+                        }
+                    }
+                    int sub = 0;
+                    sub = n1 - n2;
+                    System.out.println(sub);
+                } 
+                //Multiplicação
+                else if (variavelArray[1] == '*' && Character.isLetter(variavelArray[2])) {
+                    for (int i = 0; i < contVar; i++) {
+                        if (variavelArray[2] == variaveis[i]) {
+                            break;
+                        }
+
+                        if (i == contVar - 1) {
+                            System.out.println("Variavel " + variavelArray[0] + " nao encontrada 4.");
+                        }
+                    }
+
+                    for (int k = 0; k < contVar; k++) {
+                        if (variavelArray[0] == variaveis[k]) {
+                            n1 = Integer.valueOf(numeros[k]);
+                        }
+                    }
+
+                    for (int k = 0; k < contVar; k++) {
+                        if (variavelArray[2] == variaveis[k]) {
+                            n2 = Integer.valueOf(numeros[k]);
+                        }
+                    }
+                    int mult = 0;
+                    mult = n1 * n2;
+                    System.out.println(mult);
+                } 
+                //Divisão
+                else if (variavelArray[1] == '/' && Character.isLetter(variavelArray[2])) {
+                    for (int i = 0; i < contVar; i++) {
+                        if (variavelArray[2] == variaveis[i]) {
+                            break;
+                        }
+
+                        if (i == contVar - 1) {
+                            System.out.println("Variavel " + variavelArray[0] + " nao encontrada 4.");
+                        }
+                    }
+
+                    for (int k = 0; k < contVar; k++) {
+                        if (variavelArray[0] == variaveis[k]) {
+                            n1 = Integer.valueOf(numeros[k]);
+                        }
+                    }
+
+                    for (int k = 0; k < contVar; k++) {
+                        if (variavelArray[2] == variaveis[k]) {
+                            n2 = Integer.valueOf(numeros[k]);
+                        }
+                    }
+                    int div = 0;
+                    div = n1 / n2;
+                    System.out.println(div);
+                } 
+
+                else if (variavelArray[1] == '^' && Character.isLetter(variavelArray[2])) {
+                    for (int i = 0; i < contVar; i++) {
+                        if (variavelArray[2] == variaveis[i]) {
+                            break;
+                        }
+
+                        if (i == contVar - 1) {
+                            System.out.println("Variavel " + variavelArray[0] + " nao encontrada 4.");
+                        }
+                    }
+
+                    for (int k = 0; k < contVar; k++) {
+                        if (variavelArray[0] == variaveis[k]) {
+                            n1 = Integer.valueOf(numeros[k]);
+                        }
+                    }
+
+                    for (int k = 0; k < contVar; k++) {
+                        if (variavelArray[2] == variaveis[k]) {
+                            n2 = Integer.valueOf(numeros[k]);
+                        }
+                    }
+                    int exp = 0;
+                    exp = n1 ^ n2;
+                    System.out.println(exp);
+                } else {
+                System.out.println("Erro: expressão inválida");
+            }
+        }
+            
+
+            // for (int j=0; j < contVar; j++) {
+            //     System.out.println("Variável: " + variaveis[j] + " " + "Num: " + numeros[j]);    
+            // }
+        
+        }
+    }
+}
 
         //p.EXIT();
     //}
-    }
+    //
+//}
+
 }
 
 
