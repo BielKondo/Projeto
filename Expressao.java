@@ -76,7 +76,7 @@ public class Expressao {
         while (!pilha.isEmpty()) {
             sb.append(pilha.pop()).append(" ");
             if (pilha.isEmpty() && letras == 0) {
-                tamSb = sb.length();
+                int tamSb = sb.length(); // Declare and initialize tamSb here
                 System.out.println(sb.toString());
                 fila.fila(tamSb, sb.toString(), contVar, variaveis, numeros); // Envia a expressao para a fila
                 sb.setLength(0); // Limpa o StringBuilder para a próxima expressão (Fonte: AI)
