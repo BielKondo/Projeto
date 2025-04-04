@@ -1,18 +1,16 @@
-import java.util.Scanner;
-
 public class Comandos {
-    public static void main(String[] args){
-    try (Scanner scanner = new Scanner(System.in)) {
+    public void comando(String variavel){
+    //try (Scanner scanner = new Scanner(System.in)) {
         String[] comandosGravados = new String[10]; //limite de 10 Comandos
         
         int numComandosGravados = 0;
 
         boolean gravando = false;
 
-        while (true){
-            String comando = scanner.nextLine();
+        //while (true){
+            //String comando = scanner.nextLine();
 
-            if (comando.equals("REC")){
+            if (variavel.equals("REC")){
                 if (!gravando){
                     gravando = true;
                     numComandosGravados = 0;
@@ -21,7 +19,7 @@ public class Comandos {
                     System.out.println("Erro: Gravação ja iniciada.");
                 }
 
-            } else if (comando.equals("STOP")){
+            } else if (variavel.equals("STOP")){
                 if (gravando){
                     gravando = false;
                     System.out.println("Encerrando gravação... (REC: " + numComandosGravados + "/10)");
@@ -29,7 +27,7 @@ public class Comandos {
                     System.out.println("Erro: Nenhuma gravação em andamento.");
                 }
 
-            } else if (comando.equals("PLAY")){
+            } else if (variavel.equals("PLAY")){
                 if (!gravando){
                     if (numComandosGravados > 0){
                         System.out.println("Reproduzindo gravação...");
@@ -39,7 +37,7 @@ public class Comandos {
                     }
                 }
 
-            } else if (comando.equals("ERASE")){
+            } else if (variavel.equals("ERASE")){
                 if (!gravando){
                     numComandosGravados = 0;
                     System.out.println("Gravação apagada.");
@@ -49,18 +47,17 @@ public class Comandos {
 
             } else if (gravando) {
                 if (numComandosGravados < comandosGravados.length) {
-                    comandosGravados[numComandosGravados] = comando;
+                    comandosGravados[numComandosGravados] = variavel;
                     numComandosGravados++;
-                    System.out.println("(REC: " + numComandosGravados + "/10) " + comando);
+                    System.out.println("(REC: " + numComandosGravados + "/10) " + variavel);
                 } else {
                     System.out.println("Erro: Limite de comandos atingido.");
                 }
             
-            } else if (comando.equals("EXIT")) {
+            } else if (variavel.equals("EXIT")) {
                 System.exit(0);
             }
-        }
-    }
+        //}
     }
 }
-
+//}
