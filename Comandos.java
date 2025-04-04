@@ -13,7 +13,7 @@ public class Comandos {
         }
     }
 
-    public void comando(String variavel) {
+    public void comando(String variavel, char[] variaveis, double[] numeros, int contVar) {
         if (variavel.equals("REC")) {
             if (!gravando) {
                 gravando = true;
@@ -46,7 +46,7 @@ public class Comandos {
                 System.out.println("Erro: Comando inválido durante a gravação.");
             }
         } else if (variavel.equals("VARS")) {
-            exibirVariaveis();
+            exibirVariaveis(variaveis, numeros, contVar);
         } else if (variavel.equals("RESET")) {
             resetarVariaveis();
         } else if (gravando) {
@@ -82,16 +82,16 @@ public class Comandos {
 
     private void executarComandos() {
         for (int i = 0; i < numComandosGravados; i++) {
-            comando(comandosGravados[i]);
+            //comando(comandosGravados[i], variaveis, numeros);
         }
     }
 
-    private void exibirVariaveis() {
+    private void exibirVariaveis(char[] variaveis, double[] numeros, int contVar) {
         if (numVariaveisDefinidas == 0) {
             System.out.println("Nenhuma variável definida.");
         } else {
-            for (int i = 0; i < numVariaveisDefinidas; i++) {
-                System.out.println(nomesVariaveis[i] + " = " + valoresVariaveis[i]);
+            for (int i = 0; i < contVar; i++) {
+                System.out.println(variaveis[i] + " = " + numeros[i]);
             }
         }
     }
