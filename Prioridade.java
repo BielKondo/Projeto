@@ -1,4 +1,4 @@
-public class Prioridade {
+public class Prioridade { // Inspirado de outros colegas
     public static int prioridade(char operacao) {
         switch (operacao) {
             case '+':

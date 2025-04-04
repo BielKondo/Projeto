@@ -1,4 +1,6 @@
-// filepath: c:\Users\gabri\OneDrive\Área de Trabalho\Random\Projeto\Main.java
+//Eduardo Kenji Hernandes Ikematu 10439924
+//Gabriel Hideaquy Kono 10436238
+//João Pedro Sinzato Bocchini 10440034
 import java.util.Scanner;
 
 public class Main {
