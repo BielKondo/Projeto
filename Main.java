@@ -3,15 +3,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Boolean onOff = true;
+        boolean onOff = true;
 
-        EntradaDados entrada = new EntradaDados();
-        Expressao expressao = new Expressao();
+        Scanner sc = new Scanner(System.in); // Criação de um único Scanner
+        EntradaDados entrada = new EntradaDados(); // Passa o Scanner para a classe
 
         while (onOff) {
             entrada.entradaDados(sc);
-
         }
     }
 }
